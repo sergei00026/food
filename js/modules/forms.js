@@ -1,30 +1,18 @@
-function forms() {
+import { openModal, closeModal } from "./modal";
+import { postData } from "../services/services";
+
+function forms(formSelector, modalTimerId) {
 	// Forms
 
-	const forms = document.querySelectorAll('form');
+	const forms = document.querySelectorAll(formSelector);
 
 	const message = {
 		loading: 'img/form/spinner.svg',
 		success: 'Спасибо! Мы скоро с Вами свяжемся!',
 		failure: 'Что-то пошло не так...',
-	}
+	};
 
 	forms.forEach(item => bindPostData(item));
-
-	// Функционал по отправке на сервер
-	// async указывает что нужно ждать сначала await
-	const postData = async (url, data) => {
-		// await - показывает что именно нужно ждать
-		const res = await fetch(url, {
-			method: "POST",
-			headers: {
-				'Content-type': 'application/json',
-			},
-			body: data,
-		});
-
-		return await res.json();
-	};
 
 	function bindPostData(form) {
 		form.addEventListener("submit", function (e) {
@@ -58,7 +46,7 @@ function forms() {
 					// - finally - событие происходит в любом случае
 				}).finally(() => {
 					form.reset();
-				})
+				});
 		});
 	}
 
@@ -69,7 +57,7 @@ function forms() {
 		// Скрываю стандартный контент модалки
 		prevModalDialog.classList.add('hide');
 
-		openModal();
+		openModal('.modal', modalTimerId);
 
 		// Создаю структуру для красивго появления подсказки
 		const thanksModal = document.createElement('div');
@@ -88,7 +76,7 @@ function forms() {
 			thanksModal.remove();
 			prevModalDialog.classList.add('show');
 			prevModalDialog.classList.remove('hide');
-			closeModal();
+			closeModal('.modal');
 		}, 4000);
 	}
 }

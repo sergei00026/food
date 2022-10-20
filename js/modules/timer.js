@@ -1,8 +1,7 @@
-function timer() {
+function timer(id, deadline) {
 	// timer =========================================================================
 
 	// Указываю дату когда остановится таймер
-	const deadline = '2022-10-25';
 
 	// Функция для получения остаточного времени
 	function getTimeRemaining(endtime) {
@@ -58,7 +57,7 @@ function timer() {
 		}
 	}
 
-	setClock('.timer', deadline);
+	setClock(id, deadline);
 }
 
 export default timer;

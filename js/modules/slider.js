@@ -1,14 +1,14 @@
-function slider() {
+function slider({ container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field }) {
 	// Слайдер =============================
 
-	const slides = document.querySelectorAll('.offer__slide'),
-		slider = document.querySelector('.offer__slider'),
-		prev = document.querySelector('.offer__slider-prev'),
-		next = document.querySelector('.offer__slider-next'),
-		totalSlide = document.querySelector('#total'),
-		currentSlide = document.querySelector('#current'),
-		slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-		sliderField = document.querySelector('.offer__slider-inner'),
+	const slides = document.querySelectorAll(slide),
+		slider = document.querySelector(container),
+		prev = document.querySelector(prevArrow),
+		next = document.querySelector(nextArrow),
+		totalSlide = document.querySelector(totalCounter),
+		currentSlide = document.querySelector(currentCounter),
+		slidesWrapper = document.querySelector(wrapper),
+		sliderField = document.querySelector(field),
 		// Получить ширину одного слайда
 		width = window.getComputedStyle(slidesWrapper).width;
 
@@ -147,7 +147,7 @@ function slider() {
 
 			// Устанавливаю слайдиндекс в значение slideTo
 			slideIndex = slideTo;
-			offset = deleteNotDigits(width) * (slideTo - 1)
+			offset = deleteNotDigits(width) * (slideTo - 1);
 
 			sliderField.style.transform = `translateX(-${offset}px)`;
 
@@ -159,8 +159,8 @@ function slider() {
 
 			dots.forEach(dot => dot.style.opacity = '0.5');
 			dots[slideIndex - 1].style.opacity = 1;
-		})
-	})
+		});
+	});
 }
 
 export default slider;
